@@ -1,7 +1,7 @@
 import { HOME, MOTOR } from '../common/common.enum';
 import MessagingResponse from 'twilio/lib/twiml/MessagingResponse';
 
-const home = (req: any, res: any, next: any): any => {
+const home = (req: any, res: any): any => {
   const twilioInstance = new MessagingResponse();
   req.session.value = req.body.From;
   req.session['step'] = HOME.STEP;
@@ -12,7 +12,7 @@ const home = (req: any, res: any, next: any): any => {
   return res.status(200).send(twilioInstance.toString());
 };
 
-const motor = (req: any, res: any, next: any) => {
+const motor = (req: any, res: any) => {
   const twilioInstance = new MessagingResponse();
   req.session.value = req.body.From;
   req.session['step'] = MOTOR.STEP;

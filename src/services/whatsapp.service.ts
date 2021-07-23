@@ -29,8 +29,6 @@ const ussd = async (req: any, res: any, next: any) => {
       const result = await customsearch.cse.list(options);
       if (result.data.items !== undefined) {
         const firstResult = result.data.items[0];
-        const searchData: string | never[] = [];
-        const link = firstResult.link;
       }
 
       if (q == '1') {
