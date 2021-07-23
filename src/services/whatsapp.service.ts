@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 import { cx, googleApiKey } from '../config';
 import MessagingResponse from 'twilio/lib/twiml/MessagingResponse';
-import { home, motor } from './steps.service';
+import { home} from './steps.service';
 const customsearch = google.customsearch('v1');
 /**
  * @class WhatsappBot
@@ -27,12 +27,12 @@ const ussd = async (req: any, res: any, next: any) => {
     const options = { cx, q, auth: googleApiKey };
     try {
       const result = await customsearch.cse.list(options);
-        if (result.data.items && result.data.items.length > 0) {
-          for (const values of result.data.items) {
-            twiml.message(`${values.snippet}   ${values.link}`);
-          }
-        } else {
-          twiml.message(`No Results Found `);
+      if (result.data.items && result.data.items.length > 0) {
+        for (const values of result.data.items) {
+          twiml.message(`${values.snippet}   ${values.link}`);
+        }
+      } else {
+        twiml.message(`No Results Found `);
       }
       res.set('Content-Type', 'text/xml');
       return res.status(200).send(twiml.toString());
@@ -46,6 +46,6 @@ const ussd = async (req: any, res: any, next: any) => {
 
 const status = async (req: { body: any }): Promise<string> => {
   console.log(' =======> ======> =======> ======> ' + JSON.stringify(req.body));
-  return "";
+  return '';
 };
 export { ussd, status };
