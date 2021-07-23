@@ -1,12 +1,12 @@
-import dotenv from "dotenv";
-import twilio from "twilio";
+import dotenv from 'dotenv';
+import twilio from 'twilio';
 dotenv.config();
 
 const {
   SID: accountSid,
   KEY: TwilloAuthToken,
   APIKEY: googleApiKey,
-  CX: cx,
+  CX: cx
 } = process.env;
 
 const twilioAuthentication = twilio(accountSid, TwilloAuthToken);
