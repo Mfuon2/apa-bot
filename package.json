@@ -11,6 +11,15 @@
     "lint": "prettier --check . && eslint src/**/*.ts",
     "format": "prettier --write . && eslint src/**/*.ts --fix"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.ts": ["tslint", "prettier --write", "git add"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mfuon2/sap_bone.git"
@@ -60,13 +69,5 @@
     "source-map-support": "^0.5.16",
     "tslint": "^6.0.0",
     "typescript": "^4.3.5"
-  },
-  "husky": {
-    "hooks": {
-      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
-      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
-      "post-applypatch": "echo \"[Husky] post-applypatch\"",
-      "pre-commit": "echo \"[Husky] pre-commit\""
-    }
   }
 }
