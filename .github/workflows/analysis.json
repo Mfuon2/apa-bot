@@ -1,0 +1,23 @@
+workflow "analysis-publisher/ci" {
+  on = "push"
+  resolves = [
+    "analysis-publisher/ci/publish-analysis",
+  ]
+}
+
+action "analysis-publisher/ci/analyze" {
+  uses = "openjdk:11"
+  runs = ["./gradlew", "check"]
+}
+
+action "analysis-publisher/ci/publish-analysis" {
+  needs = ["analysis-publisher/ci/analyze"]
+  secrets = ["GITHUB_TOKEN"]
+
+  uses = "garyttierney/analysis-publisher@master"
+  args = [
+    "--report-type=checkstyle", "--path=**/checkstyle/*.xml",
+    "--report-type=spotbugs", "--path=**/spotbugs/*.xml",
+    "--publisher=github_check"
+  ]
+}
