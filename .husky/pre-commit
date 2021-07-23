@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+pre-comit
+yarn run lint-fix
+undefined
+pre-commit
+undefined
+yarn run lint-fix
+yarn run lint-fix
+yarn run lint-fix

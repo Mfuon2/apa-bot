@@ -6,10 +6,13 @@
   "scripts": {
     "start": "tsc && nodemon app.ts",
     "build": "tsc",
+    "pre-commit": "lint-staged",
     "debug": "export DEBUG=* && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "prettier --check . && eslint src/**/*.ts",
-    "format": "prettier --write . && eslint src/**/*.ts --fix"
+    "format": "prettier --write . && eslint src/**/*.ts --fix",
+    "prepare": "husky install && npx husky add .husky/pre-commit \"yarn run lint-fix\"",
+    "lint-fix": "eslint src/**/*.ts --fix"
   },
   "husky": {
     "hooks": {
@@ -18,7 +21,11 @@
     }
   },
   "lint-staged": {
-    "*.ts": ["tslint", "prettier --write", "git add"]
+    "src/**/*.ts": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -65,6 +72,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-no-loops": "^0.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "lint-staged": "^11.1.0",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.16",
     "tslint": "^6.0.0",
