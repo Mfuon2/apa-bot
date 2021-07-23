@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 import { cx, googleApiKey } from '../config';
 import MessagingResponse from 'twilio/lib/twiml/MessagingResponse';
-import { home} from './steps.service';
+import { home } from './steps.service';
 const customsearch = google.customsearch('v1');
 /**
  * @class WhatsappBot
