@@ -14,7 +14,6 @@ const customsearch = google.customsearch('v1');
  * @param {object} next - Error handler
  * @returns {object} - object representing response message
  */
-const googleSearch = async (req: any, res: any, next: any) => {};
 const ussd = async (req: any, res: any, next: any) => {
   const twilioInstance = new MessagingResponse();
   req.session['name'] = req.body.From;
@@ -27,13 +26,12 @@ const ussd = async (req: any, res: any, next: any) => {
     const q = req.body.Body;
     const options = { cx, q, auth: googleApiKey };
     try {
-      // @ts-ignore
       const result = await customsearch.cse.list(options);
-      // @ts-ignore
-      const firstResult = result.data.items[0];
-
-      const searchData: string | never[] = [];
-      const link = firstResult.link;
+      if (result.data.items !== undefined) {
+        const firstResult = result.data.items[0];
+        const searchData: string | never[] = [];
+        const link = firstResult.link;
+      }
 
       if (q == '1') {
         twiml.message(
@@ -64,4 +62,4 @@ const status = async (req: { body: any }) => {
   console.log(' =======> ======> =======> ======> ' + JSON.stringify(req.body));
   return;
 };
-export { ussd, googleSearch, status };
+export { ussd, status };

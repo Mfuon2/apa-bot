@@ -1,7 +1,7 @@
 import { HOME, MOTOR } from '../common/common.enum';
 import MessagingResponse from 'twilio/lib/twiml/MessagingResponse';
 
-const home = (req: any, res: any, next: any) => {
+const home = (req: any, res: any, next: any): any => {
   const twilioInstance = new MessagingResponse();
   req.session.value = req.body.From;
   req.session['step'] = HOME.STEP;
