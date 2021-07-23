@@ -1,16 +1,40 @@
-      - name: Run Bridgecrew 
-        id: Bridgecrew
-        uses: bridgecrewio/bridgecrew-action@master
-        with:
-         api-key: ${{ secrets.BRIDGECREW_API_KEY }}
-         directory: "src/"
-         check: CKV_AWS_1 # optional: run only a specific check_id. can be comma separated list
-         skip_check: CKV_AWS_1 # optional: skip a specific check_id. can be comma separated list
-         soft_fail: false
-         framework: terraform # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
-         output_format: cli
-         quiet: false
-         external_checks_dir: ./checkov
-         download_external_modules: true # optional: download external terraform modules from public git repositories and terraform registry
-         log_level: DEBUG # optional: set log level. Default WARNING
+# This is a basic workflow to help you get started with Actions
 
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+   bridgecrew:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Bridgecrew 
+      id: Bridgecrew
+      uses: bridgecrewio/bridgecrew-action@master
+      with:
+        api-key: ${{ secrets.API_KEY }}
+        soft-fail: true
+      env:  
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_REF: ${{ github.ref }}
+        GITHUB_SHA: ${{ github.sha }}
+        GITHUB_SERVER_URL: $GITHUB_SERVER_URL  
+    - name: Expose report
+      uses: actions/upload-artifact@v2
+      with:
+        name: SARIF results
+        path: results.sarif
+    # Uploads results.sarif to GitHub repository using the upload-sarif action
+    - uses: github/codeql-action/upload-sarif@v1
+      with:
+        # Path to SARIF file relative to the root of the repository
+        sarif_file: results.sarif
