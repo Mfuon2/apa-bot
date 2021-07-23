@@ -6,9 +6,7 @@ import * as expressWinston from 'express-winston';
 import cors from 'cors';
 import { CommonRoutesConfig } from './common/common.routes.config';
 import debug from 'debug';
-import twilio from 'twilio';
 import { twilioInstance } from './src/config';
-// import v1Router from "./src/routes";
 import { WhatsAppRoutes } from './src/routes/whatsapp.routes.config';
 
 const redis = require('redis');

@@ -6,7 +6,7 @@ const home = (req: any, res: any): any => {
   req.session.value = req.body.From;
   req.session['step'] = HOME.STEP;
   twilioInstance.message(
-    `${HOME.BODY}${HOME.MOTOR}${HOME.MONEY_MARKET} ${HOME.LIFE_ASSURANCE} ${HOME.TERMS_CONDITION} ${HOME.WEBSITE} ${HOME.EXIT}`
+    `${HOME.BODY}${HOME.MOTOR_INSURANCE}${HOME.MONEY_MARKET} ${HOME.LIFE_ASSURANCE} ${HOME.TERMS_CONDITION} ${HOME.WEBSITE} ${HOME.EXIT}`
   );
   res.set('Content-Type', 'text/xml');
   return res.status(200).send(twilioInstance.toString());

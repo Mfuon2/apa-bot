@@ -1,6 +1,6 @@
 enum HOME {
   BODY = '*Mambo vipi 🖐️*  \nMy name is Furaha - the happiness bot 🤖\nChoose an option from the menu below \n',
-  MOTOR = '\n*1. 🚘 Motor Insurance*',
+  MOTOR_INSURANCE = '\n*1. 🚘 Motor Insurance*',
   MONEY_MARKET = '\n*2. 💹 Money Market* ',
   LIFE_ASSURANCE = '\n*3. 👨‍ Life Assurance*',
   TERMS_CONDITION = '\n*4. 🗒️ Terms & Condition*',

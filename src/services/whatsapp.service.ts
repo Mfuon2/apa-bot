@@ -27,33 +27,25 @@ const ussd = async (req: any, res: any, next: any) => {
     const options = { cx, q, auth: googleApiKey };
     try {
       const result = await customsearch.cse.list(options);
-      if (q == '1') {
-        twiml.message(
-          `*Welcome to Sap* \n --------------*-------------\n Scalable Bot for a customized search engine `
-        );
-      } else {
         if (result.data.items && result.data.items.length > 0) {
           for (const values of result.data.items) {
             twiml.message(`${values.snippet}   ${values.link}`);
           }
         } else {
           twiml.message(`No Results Found `);
-        }
       }
       res.set('Content-Type', 'text/xml');
       return res.status(200).send(twiml.toString());
     } catch (error) {
       return next(error);
     }
-  } else if (rule === '1') {
-    return motor(req, res);
   } else {
     return home(req, res);
   }
 };
 
-const status = async (req: { body: any }) => {
+const status = async (req: { body: any }): Promise<string> => {
   console.log(' =======> ======> =======> ======> ' + JSON.stringify(req.body));
-  return;
+  return "";
 };
 export { ussd, status };
