@@ -27,10 +27,6 @@ const ussd = async (req: any, res: any, next: any) => {
     const options = { cx, q, auth: googleApiKey };
     try {
       const result = await customsearch.cse.list(options);
-      if (result.data.items !== undefined) {
-        const firstResult = result.data.items[0];
-      }
-
       if (q == '1') {
         twiml.message(
           `*Welcome to Sap* \n --------------*-------------\n Scalable Bot for a customized search engine `
@@ -50,9 +46,9 @@ const ussd = async (req: any, res: any, next: any) => {
       return next(error);
     }
   } else if (rule === '1') {
-    return motor(req, res, next);
+    return motor(req, res);
   } else {
-    return home(req, res, next);
+    return home(req, res);
   }
 };
 
