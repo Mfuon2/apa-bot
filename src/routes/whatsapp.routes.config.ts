@@ -1,5 +1,5 @@
 import { CommonRoutesConfig } from '../../common/common.routes.config';
-import { ussd, status } from '../services/whatsapp.service';
+import { ussd} from '../services/whatsapp.service';
 import express from 'express';
 
 export class WhatsAppRoutes extends CommonRoutesConfig {
@@ -8,7 +8,6 @@ export class WhatsAppRoutes extends CommonRoutesConfig {
   }
   configureRoutes(): express.Application {
     this.app.post('/incoming', ussd);
-    this.app.post('/status', status);
     return this.app;
   }
 }

@@ -1,0 +1,24 @@
+{
+  "balance": {
+    "UnitTrustFundDetails": [
+      {
+        "ClientIdentifier": "254725065948-123456",
+        "InvestorNames": "Erick Ngari",
+        "FundShareClassCode": "PROJECTX",
+        "FundName": "PROJECTX",
+        "MarketValue": 28162.88,
+        "Contributions": 0,
+        "Withdrawals": 0,
+        "Balance": 28162.88,
+        "Units": 28162.88,
+        "UnitPrice": 1,
+        "GainLoss": 0,
+        "CumulativeIncome": 162.88
+      }
+    ],
+    "ClientIdentifier": "254725065948-123456",
+    "IsSuccess": true,
+    "Message": "Request succeeded",
+    "ResponseCode": 200
+  }
+}
