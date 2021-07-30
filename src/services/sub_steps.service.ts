@@ -6,6 +6,8 @@ import qs from 'qs';
 import { createSession } from './redis.service';
 import { INVESTMENTS } from '../common/common.enum';
 import { INVESTMENT_BALANCE } from '../common/investment.enum';
+import Logger from '../lib/logger';
+import { info } from './logger.service';
 
 const investments_balance = (req: any, res: any) => {
   const twilioInstance = new MessagingResponse();
@@ -15,7 +17,7 @@ const investments_balance = (req: any, res: any) => {
   });
   createSession(req.body.From, INVESTMENTS.STEP, INVESTMENT_BALANCE.STEP).then(
     () => {
-      console.log('saved session');
+      info('Save Investment step');
     }
   );
   const config: AxiosRequestConfig = {
@@ -31,7 +33,6 @@ const investments_balance = (req: any, res: any) => {
     .then((response: any) => {
       const dto: FundBalance = response.data;
       if (dto.IsSuccess) {
-        console.log(JSON.stringify(dto));
         twilioInstance.message(
           ` Dear ${dto.UnitTrustFundDetails[0].InvestorNames}, your account balance for Apollo Money Market is KES. ${dto.UnitTrustFundDetails[0].Balance}. Thanks for choosing us 😊`
         );
@@ -42,7 +43,7 @@ const investments_balance = (req: any, res: any) => {
       return res.status(200).send(twilioInstance.toString());
     })
     .catch((error: any) => {
-      console.log(error);
+      Logger.error(error);
     });
 };
 

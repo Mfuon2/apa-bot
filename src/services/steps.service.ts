@@ -13,7 +13,11 @@ import { cx, googleApiKey } from '../config';
 import { google } from 'googleapis';
 import { createSession, redis } from './redis.service';
 import { aamc_request } from './request.js';
-const customsearch = google.customsearch('v1');
+import Logger from '../lib/logger';
+import { info } from './logger.service';
+
+const log = Logger;
+const customSearch = google.customsearch('v1');
 
 const home = (req: any, res: any): any => {
   controller(req, res);
@@ -23,20 +27,24 @@ const motor = (req: any, res: any) => {
   const twilioInstance = new MessagingResponse();
   twilioInstance.message(`${MOTOR.BODY}`);
   twilioInstance.message(`${MAINTENANCE.BODY}`);
-  createSession(req.body.From, HOME.STEP, HOME.STEP).then(() => {});
+  createSession(req.body.From, HOME.STEP, HOME.STEP).then(() => {
+    info(`Handler: ${HOME.STEP}`);
+  });
   res.set('Content-Type', 'text/xml');
   return res.status(200).send(twilioInstance.toString());
 };
 
 const controller = (req: any, res: any) => {
   const twilioInstance = new MessagingResponse();
-  console.log(' ===============  ' + req.body.Body);
+  log.info(' Instruction ' + req.body.Body);
   switch (req.body.Body.toLocaleLowerCase()) {
     case '1':
     case 'money':
     case 'money market':
       createSession(req.body.From, HOME.STEP, INVESTMENTS.STEP).then(() => {
-        investments(req, res).then(() => {});
+        investments(req, res).then(() => {
+          info(`Handler: ${INVESTMENTS.STEP}`);
+        });
       });
       break;
     case '20':
@@ -62,7 +70,9 @@ const controller = (req: any, res: any) => {
       twilioInstance.message(
         `${HOME.BODY} ${HOME.MONEY_MARKET} ${HOME.MOTOR}  ${HOME.LIFE} ${HOME.UPENDO} ${HOME.HEALTH} ${HOME.EXIT}`
       );
-      createSession(req.body.From, HOME.STEP, HOME.STEP).then(() => {});
+      createSession(req.body.From, HOME.STEP, HOME.STEP).then(() => {
+        info(`Current Handler: ${HOME.STEP}`);
+      });
       res.set('Content-Type', 'text/xml');
       return res.status(200).send(twilioInstance.toString());
   }
@@ -132,7 +142,7 @@ const website_search = async (req: any, res: any) => {
   const q = req.body.Body;
   const options = { cx, q, auth: googleApiKey };
   try {
-    const result = await customsearch.cse.list(options);
+    const result = await customSearch.cse.list(options);
     if (result.data.items && result.data.items.length > 0) {
       for (const values of result.data.items) {
         twiml.message(`${values.snippet}   ${values.link}`);

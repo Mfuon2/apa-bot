@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { createSession, redis } from './redis.service';
+import { redis } from './redis.service';
 import { v4 as uuidv4 } from 'uuid';
-import { HOME, INVESTMENTS } from '../common/common.enum';
+import Logger from '../lib/logger';
+import { info } from './logger.service';
 
 const aamc_request = async (req: any) => {
   let message = req.body.Body.toLocaleLowerCase();
@@ -11,9 +12,9 @@ const aamc_request = async (req: any) => {
   if (uuid !== '' || uuid !== undefined || true) {
     sessionId = uuid;
   }
-  console.log(sessionId);
-  console.log(message);
-  console.log(senderID);
+  Logger.info(sessionId);
+  Logger.info(message);
+  Logger.info(senderID);
 
   if (
     message.includes('hello') ||
@@ -40,13 +41,17 @@ const aamc_request = async (req: any) => {
               sessionId = uuidv4();
               await redis
                 .set('session_' + req.body.From, sessionId)
-                .then(() => {});
+                .then(() => {
+                  info(
+                    `Saved session key ${req.body.From} with Session ID : ${sessionId}`
+                  );
+                });
             });
         }
       });
   }
 
-  console.log('New message: ' + message);
+  Logger.info('New message: ' + message);
 
   /*https://gist.github.com/akexorcist/ea93ee47d39cf94e77802bc39c46589b*/
   const params = new URLSearchParams();
@@ -58,13 +63,6 @@ const aamc_request = async (req: any) => {
     params.append('sessionId', sessionId);
   }
 
-  /*
-phoneNumber:254725065948
-serviceCode:*354#
-text:1
-networkCode:45555
-sessionId:s1
-*/
   const config = {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -77,17 +75,14 @@ sessionId:s1
     .post(url, params, config)
     .then((result) => {
       let response = result.data;
-      console.log(response);
+      Logger.info(response);
       response = response.replace('CON ', '');
       response = response.replace('END ', '');
       return response;
     })
     .catch((err) => {
-      console.log(err);
+      Logger.error(err);
     });
-
-  // Write a function to send message back to WhatsApp
-  //await WA.sendMessage('Hello from the other side.', senderID);
 };
 
 export { aamc_request };

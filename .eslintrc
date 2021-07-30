@@ -15,7 +15,8 @@
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-parameter-properties": 0,
     "@typescript-eslint/interface-name-prefix": 0,
-    "@typescript-eslint/no-explicit-any": 0
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/ban-ts-comment": "off"
     // "no-throw-literal": "off",
     // "@typescript-eslint/no-throw-literal": ["error"]
   },
