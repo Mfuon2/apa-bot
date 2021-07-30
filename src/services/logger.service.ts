@@ -14,4 +14,8 @@ const error = (msg: any) => {
   Logger.error(`ERROR : ${msg}`);
 };
 
+const http = (msg: any) => {
+  Logger.http(`ERROR : ${msg}`);
+};
+
 export { info, warn, debug, error };

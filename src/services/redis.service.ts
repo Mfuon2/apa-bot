@@ -1,7 +1,12 @@
 import { SavedSession, Steps } from '../interfaces/session';
 import Redis from 'ioredis';
+import { error, info } from './logger.service';
+import { http } from 'winston';
 
-const redis = new Redis();
+const redis = new Redis({
+  port: 6379,          // Redis port
+  host: '127.0.0.1',   // Redis host
+});
 
 const createSession = async (user: any, from: any, handlerFunction: any) => {
   const session: Steps = {
@@ -26,4 +31,21 @@ const getUserSession = async (user: string): Promise<SavedSession> => {
     steps: []
   };
 };
+
+redis.on("connect", function (x) {
+  info(`Redis client connected to:\t ${redis.options.host}:${redis.options.port}`)
+});
+redis.on('error', err => {
+  error(`Redis::error event - ${redis.options.host}:${redis.options.port} - ${err}`);
+  error(err);
+});
+
+redis.on('message', function(channel: any, message: any) {
+  http(`Receive message ${message} from channel ${channel}`)
+});
+
+redis.on('messageBuffer', function(channel: any, message: any) {
+  http(`${channel} has ${message}`)
+});
+
 export { createSession, getUserSession, redis };
