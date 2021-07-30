@@ -3,6 +3,9 @@ import { FundBalance } from '../interfaces/fund_balance';
 
 import axios, { AxiosRequestConfig } from 'axios';
 import qs from 'qs';
+import { createSession } from './redis.service';
+import { INVESTMENTS } from '../common/common.enum';
+import { INVESTMENT_BALANCE } from '../common/investment.enum';
 
 const investments_balance = (req: any, res: any) => {
   const twilioInstance = new MessagingResponse();
@@ -10,6 +13,11 @@ const investments_balance = (req: any, res: any) => {
   const data = qs.stringify({
     ClientIdentifier: '254725065948-123456'
   });
+  createSession(req.body.From, INVESTMENTS.STEP, INVESTMENT_BALANCE.STEP).then(
+    () => {
+      console.log('saved session');
+    }
+  );
   const config: AxiosRequestConfig = {
     method: 'post',
     url: 'https://192.168.100.112:7777/api/UnitTrust/FetchInvestorUnitTrustFunds?api-version=2.0',

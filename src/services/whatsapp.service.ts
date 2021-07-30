@@ -1,6 +1,7 @@
-import { investments, wrong_selection } from './steps.service';
+import { home, investments } from './steps.service';
 import { getUserSession } from './redis.service';
 import { getUserStep } from './session.service';
+import { HOME, INVESTMENTS } from '../common/common.enum';
 
 /**
  * @class WhatsappBot
@@ -14,21 +15,29 @@ import { getUserStep } from './session.service';
  * @returns {object} - object representing response message
  */
 const ussd = async (req: any, res: any) => {
-  const selection = req.body.Body;
   await getUserSession(req.body.From).then((data) => {
-    getUserStep(data);
+    const step = getUserStep(data.steps);
+    console.log(step);
+    if (
+      step === undefined ||
+      step.toLocaleLowerCase().match('hi') ||
+      step.toLocaleLowerCase().match('hello') ||
+      step.toLocaleLowerCase().match('hey')
+    ) {
+      return home(req, res);
+    }
+    switch (step) {
+      case HOME.STEP:
+        home(req, res);
+        break;
+      case INVESTMENTS.STEP:
+        investments(req, res);
+        break;
+      default:
+        home(req, res);
+        break;
+    }
   });
-
-  switch (selection) {
-    case '1':
-    case '2':
-    case '3':
-    case '4':
-    case '5':
-      return investments(req, res);
-    default:
-      return wrong_selection(req, res);
-  }
 };
 
 export { ussd };
