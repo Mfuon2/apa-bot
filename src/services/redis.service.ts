@@ -15,9 +15,15 @@ const createSession = async (user: any, from: any, handlerFunction: any) => {
 
 const getUserSession = async (user: string): Promise<SavedSession> => {
   const session: any[] = await redis.lrange(`${user}`, 0, -1);
+  if (session.length > 0)
+    return {
+      userId: user,
+      steps: session
+    };
+
   return {
     userId: user,
-    steps: session
+    steps: []
   };
 };
-export { createSession, getUserSession };
+export { createSession, getUserSession, redis };

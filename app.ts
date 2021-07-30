@@ -8,6 +8,8 @@ import { CommonRoutesConfig } from './common/common.routes.config';
 import debug from 'debug';
 import { twilioInstance } from './src/config';
 import { WhatsAppRoutes } from './src/routes/whatsapp.routes.config';
+import Logger from './src/lib/logger';
+import morganMiddleware from './src/middleware/morgan';
 
 const redis = require('redis');
 const session = require('express-session');
@@ -19,19 +21,11 @@ const port = 80;
 const routes: Array<CommonRoutesConfig> = [];
 const debugLog: debug.IDebugger = debug('app');
 const twiml = twilioInstance;
+const log =Logger
 
 app.use(bodyparser.json());
 app.use(cors());
-
-app.use(
-  expressWinston.logger({
-    transports: [new winston.transports.Console()],
-    format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.json()
-    )
-  })
-);
+app.use(morganMiddleware);
 const redisClient = redis.createClient();
 app.use(
   session({
@@ -56,17 +50,8 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 routes.push(new WhatsAppRoutes(app));
 
-app.use(
-  expressWinston.errorLogger({
-    transports: [new winston.transports.Console()],
-    format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.json()
-    )
-  })
-);
-
 app.get('/', (req: express.Request, res: express.Response) => {
+  log.warn(`Server running at http://localhost:${port}`)
   res.status(200).send(`Server running at http://localhost:${port}`);
 });
 
@@ -75,8 +60,10 @@ app.post('/callback', (req: express.Request, res: express.Response) => {
 });
 
 server.listen(port, () => {
+  log.info(`Server running at http://localhost:${port}`)
   debugLog(`Server running at http://localhost:${port}`);
   routes.forEach((route: CommonRoutesConfig) => {
     debugLog(`Routes configured for ${route.getName()}`);
+    log.info(`Routes configured for ${route.getName()}`)
   });
 });

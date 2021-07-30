@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import twilio from 'twilio';
-
+import Logger from './lib/logger';
+const log =Logger
 dotenv.config();
 
 const {
@@ -16,11 +17,11 @@ const { MessagingResponse } = twilio.twiml;
 const twilioInstance = new MessagingResponse();
 
 const production = () => {
-  console.log('production environment');
+  log.info('production environment');
 };
 
 const dev = () => {
-  console.log('dev environment');
+  log.info('Started Dev environment');
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 };
 
@@ -39,7 +40,7 @@ switch (process.env.NODE_ENV) {
     dev();
     break;
   default:
-    console.error('Please set NODE_ENV environment variable');
+
     kill_server();
 }
 
