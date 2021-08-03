@@ -9,7 +9,9 @@ const {
   KEY: TwilloAuthToken,
   APIKEY: googleApiKey,
   CX: cx,
-  NODE_TLS_REJECT_UNAUTHORIZED
+  NODE_TLS_REJECT_UNAUTHORIZED,
+  REDIS_HOST: redis_host,
+  REDIS_PORT: redis_port
 } = process.env;
 
 const twilioAuthentication = twilio(accountSid, TwilloAuthToken);
@@ -44,4 +46,4 @@ switch (process.env.NODE_ENV) {
     kill_server();
 }
 
-export { twilioAuthentication, googleApiKey, cx, twilioInstance };
+export { twilioAuthentication, googleApiKey, cx, twilioInstance, redis_host, redis_port };
