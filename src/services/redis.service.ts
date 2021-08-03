@@ -6,10 +6,9 @@ import dotenv from 'dotenv';
 import { redis_host, redis_port } from '../config';
 dotenv.config();
 
-
 const redis = new Redis({
   //@ts-ignore
-  port: parseInt(redis_port),// Redis port
+  port: parseInt(redis_port), // Redis port
   host: redis_host // Redis host
 });
 
