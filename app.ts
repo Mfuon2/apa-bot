@@ -26,7 +26,7 @@ const log =Logger
 app.use(bodyparser.json());
 app.use(cors());
 app.use(morganMiddleware);
-const redisClient = redis.createClient();
+
 app.use(
   session({
     secret: [
@@ -42,7 +42,6 @@ app.use(
       sameSite: true,
       maxAge: 60000 // Time is in miliseconds
     },
-    store: new RedisStore({ client: redisClient, ttl: 86400 }),
     resave: false
   })
 );

@@ -1,0 +1,56 @@
+
+  version: '3'
+  services:
+    redis:
+      image: redis:alpine
+      container_name: redis
+      command: [ "redis-server", "--protected-mode", "no" ]
+      hostname: redis
+      expose:
+        - "6379"
+      ports:
+        - "6379:6379"
+      volumes:
+        - $PWD/redis/redis-data:/var/lib/redis
+        - $PWD/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      networks:
+        - redis
+
+    api:
+      container_name: api
+      links:
+        - redis
+      depends_on:
+        - redis
+      build:
+        context: .
+        dockerfile: Dockerfile
+      environment:
+        ##- REDIS_HOST=redis://cache
+        ##- NODE_ENV=dev
+        - PORT=80
+        - NODE_ENV=dev
+        - SID=AC2347bb94fc9d411e35f7f275113af408
+        - KEY=f968de83455b26992b782f7459f40756
+        - APIKEY=AIzaSyBqhqSbThL_OCFtOQIjt22claE6BF00shk
+        - CX=4644a0c772530c303
+        - NODE_TLS_REJECT_UNAUTHORIZED="0"
+        - REDIS_HOST=redis
+        - REDIS_PORT=6379
+      env_file: .env
+      volumes:
+        - ./dist:/usr/src/app
+        - node_modules:/usr/src/app/node_modules
+      working_dir: /usr/src/app
+      command: node app.js
+      ports:
+        - "80:80"
+      expose:
+        - "80"
+      networks:
+        - redis
+  volumes:
+    node_modules:
+  networks:
+    redis:
+      driver: "bridge"
