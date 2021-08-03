@@ -1,0 +1,73 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EXIT_MAIN = exports.WRONG_SELECTION = exports.CUSTOMER_SERVICE = exports.LIFE = exports.INVESTMENTS = exports.MOTOR = exports.HOME = exports.MAINTENANCE = void 0;
+var HOME;
+(function (HOME) {
+    HOME["BODY"] = "*Mambo vipi \uD83D\uDD90\uFE0F*  \nMy name is Furaha - the happiness bot\nChoose an option from the menu below \n";
+    HOME["MONEY_MARKET"] = "\n*1. \uD83D\uDCB0 Money market* ";
+    HOME["MOTOR"] = "\n20. \uD83D\uDE98 Motor Insurance ";
+    HOME["LIFE"] = "\n30. \uD83D\uDC6A Life assurance ";
+    HOME["UPENDO"] = "\n40. \u2764\uFE0F Upendo ";
+    HOME["HEALTH"] = "\n50. \uD83C\uDFE5\uFE0F Health ";
+    HOME["WEBSITE"] = "\n60. \u2139\uFE0F Info from Website";
+    HOME["EXIT"] = "\n*7. \uD83D\uDD34 Exit*";
+    HOME["STEP"] = "HOME";
+})(HOME || (HOME = {}));
+exports.HOME = HOME;
+var MOTOR;
+(function (MOTOR) {
+    MOTOR["BODY"] = "Welcome to Motor Insurance pane. please proceed with following options\n";
+    MOTOR["QUOTE"] = "\n*1. \uD83D\uDCCB Get Quote*";
+    // RENEW = '\n*2. 🧻 Renew Policy* ',
+    // DETAILS = '\n*3. 📚️ Policy Details*',
+    MOTOR["EXIT"] = "\n*4. \uD83D\uDD34 Exit*";
+    MOTOR["STEP"] = "MOTOR";
+})(MOTOR || (MOTOR = {}));
+exports.MOTOR = MOTOR;
+var LIFE;
+(function (LIFE) {
+    LIFE["BODY"] = "Welcome to Life Assurance pane. please proceed with following options\n";
+    LIFE["QUOTE"] = "\n*1. \uD83D\uDCCB Get Quote*";
+    LIFE["BENEFICIARIES"] = "\n*2. \uD83D\uDC6A Manage Beneficiaries* ";
+    LIFE["PREVIOUS"] = "\n*4. \u23EE\uFE0F Prev*";
+    LIFE["EXIT_LIFE"] = "\n*6. \uD83D\uDD34 Exit*";
+    LIFE["STEP"] = "LIFE";
+})(LIFE || (LIFE = {}));
+exports.LIFE = LIFE;
+var CUSTOMER_SERVICE;
+(function (CUSTOMER_SERVICE) {
+    CUSTOMER_SERVICE["BODY"] = "Welcome to Customer service. please proceed with following options\n";
+    CUSTOMER_SERVICE["CONTACT_DETAILS"] = "\n*1. \uD83C\uDFA7 Customer service*";
+    CUSTOMER_SERVICE["PREVIOUS"] = "\n*4. \u23EE\uFE0F Prev*";
+    CUSTOMER_SERVICE["EXIT"] = "\n*6. \uD83D\uDD34 Exit*";
+    CUSTOMER_SERVICE["STEP"] = "CUSTOMER SERVICE";
+})(CUSTOMER_SERVICE || (CUSTOMER_SERVICE = {}));
+exports.CUSTOMER_SERVICE = CUSTOMER_SERVICE;
+var INVESTMENTS;
+(function (INVESTMENTS) {
+    INVESTMENTS["BODY"] = "Welcome to Apollo Assets Investments. please proceed with following options\n";
+    INVESTMENTS["CHECK_INVESTMENT_BALANCE"] = "\n*1. \uD83E\uDDFE Check Balance*";
+    INVESTMENTS["USSD"] = "\n*1. \uD83D\uDCB0 Proceed to USSD*";
+    // INVESTMENT_TOP_UP = '\n*2. 💹 Top Up Investment* ',
+    // INVESTMENT_WITHDRAW = '\n*3. 💰 Withdraw*',
+    // PREVIOUS = '\n*4. ⏮️ Prev*',
+    INVESTMENTS["EXIT"] = "\n*6. \uD83D\uDD34 Exit*";
+    INVESTMENTS["STEP"] = "INVESTMENT";
+})(INVESTMENTS || (INVESTMENTS = {}));
+exports.INVESTMENTS = INVESTMENTS;
+var WRONG_SELECTION;
+(function (WRONG_SELECTION) {
+    WRONG_SELECTION["BODY"] = "You have made a wrong selection. Please try with given options on the menu or Type in Hi, Hello or Hey to initiate a conversation with Furaha";
+})(WRONG_SELECTION || (WRONG_SELECTION = {}));
+exports.WRONG_SELECTION = WRONG_SELECTION;
+var EXIT_MAIN;
+(function (EXIT_MAIN) {
+    EXIT_MAIN["BODY"] = "Thank you for using Furaha bot \uD83D\uDE42. I am glad to have interacted with you. \nBye! \uD83D\uDD90\uFE0F";
+})(EXIT_MAIN || (EXIT_MAIN = {}));
+exports.EXIT_MAIN = EXIT_MAIN;
+var MAINTENANCE;
+(function (MAINTENANCE) {
+    MAINTENANCE["BODY"] = "Oops!! something cool is coming very soon on this option \uD83E\uDD73";
+})(MAINTENANCE || (MAINTENANCE = {}));
+exports.MAINTENANCE = MAINTENANCE;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tbW9uLmVudW0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvY29tbW9uL2NvbW1vbi5lbnVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLElBQUssSUFVSjtBQVZELFdBQUssSUFBSTtJQUNQLGtJQUEyRyxDQUFBO0lBQzNHLDBEQUF3QyxDQUFBO0lBQ3hDLHFEQUFtQyxDQUFBO0lBQ25DLG1EQUFpQyxDQUFBO0lBQ2pDLDZDQUEyQixDQUFBO0lBQzNCLG1EQUE0QixDQUFBO0lBQzVCLHdEQUFzQyxDQUFBO0lBQ3RDLHlDQUF1QixDQUFBO0lBQ3ZCLHFCQUFhLENBQUE7QUFDZixDQUFDLEVBVkksSUFBSSxLQUFKLElBQUksUUFVUjtBQW9EQyxvQkFBSTtBQWxETixJQUFLLEtBT0o7QUFQRCxXQUFLLEtBQUs7SUFDUiwwRkFBaUYsQ0FBQTtJQUNqRixnREFBNkIsQ0FBQTtJQUM3QixxQ0FBcUM7SUFDckMseUNBQXlDO0lBQ3pDLDBDQUF1QixDQUFBO0lBQ3ZCLHVCQUFjLENBQUE7QUFDaEIsQ0FBQyxFQVBJLEtBQUssS0FBTCxLQUFLLFFBT1Q7QUE0Q0Msc0JBQUs7QUExQ1AsSUFBSyxJQU9KO0FBUEQsV0FBSyxJQUFJO0lBQ1Asd0ZBQWdGLENBQUE7SUFDaEYsK0NBQTZCLENBQUE7SUFDN0IsbUVBQWlELENBQUE7SUFDakQsNkNBQTJCLENBQUE7SUFDM0IsOENBQTRCLENBQUE7SUFDNUIscUJBQWEsQ0FBQTtBQUNmLENBQUMsRUFQSSxJQUFJLEtBQUosSUFBSSxRQU9SO0FBcUNDLG9CQUFJO0FBbkNOLElBQUssZ0JBTUo7QUFORCxXQUFLLGdCQUFnQjtJQUNuQixpR0FBNkUsQ0FBQTtJQUM3RSw0RUFBOEMsQ0FBQTtJQUM5Qyx5REFBMkIsQ0FBQTtJQUMzQixxREFBdUIsQ0FBQTtJQUN2Qiw2Q0FBeUIsQ0FBQTtBQUMzQixDQUFDLEVBTkksZ0JBQWdCLEtBQWhCLGdCQUFnQixRQU1wQjtBQThCQyw0Q0FBZ0I7QUE1QmxCLElBQUssV0FTSjtBQVRELFdBQUssV0FBVztJQUNkLHFHQUFzRixDQUFBO0lBQ3RGLDZFQUFvRCxDQUFBO0lBQ3BELDJEQUFrQyxDQUFBO0lBQ2xDLHNEQUFzRDtJQUN0RCw4Q0FBOEM7SUFDOUMsK0JBQStCO0lBQy9CLGdEQUF1QixDQUFBO0lBQ3ZCLGtDQUFtQixDQUFBO0FBQ3JCLENBQUMsRUFUSSxXQUFXLEtBQVgsV0FBVyxRQVNmO0FBaUJDLGtDQUFXO0FBaEJiLElBQUssZUFFSjtBQUZELFdBQUssZUFBZTtJQUNsQix5S0FBc0osQ0FBQTtBQUN4SixDQUFDLEVBRkksZUFBZSxLQUFmLGVBQWUsUUFFbkI7QUFpQkMsMENBQWU7QUFmakIsSUFBSyxTQUVKO0FBRkQsV0FBSyxTQUFTO0lBQ1osbUlBQTZGLENBQUE7QUFDL0YsQ0FBQyxFQUZJLFNBQVMsS0FBVCxTQUFTLFFBRWI7QUFjQyw4QkFBUztBQVpYLElBQUssV0FFSjtBQUZELFdBQUssV0FBVztJQUNkLDZGQUFvRSxDQUFBO0FBQ3RFLENBQUMsRUFGSSxXQUFXLEtBQVgsV0FBVyxRQUVmO0FBR0Msa0NBQVcifQ==
