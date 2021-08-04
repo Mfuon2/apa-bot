@@ -30,10 +30,6 @@
         ##- NODE_ENV=dev
         - PORT=80
         - NODE_ENV=dev
-        - SID=AC2347bb94fc9d411e35f7f275113af408
-        - KEY=f968de83455b26992b782f7459f40756
-        - APIKEY=AIzaSyBqhqSbThL_OCFtOQIjt22claE6BF00shk
-        - CX=4644a0c772530c303
         - NODE_TLS_REJECT_UNAUTHORIZED="0"
         - REDIS_HOST=redis
         - REDIS_PORT=6379
