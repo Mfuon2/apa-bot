@@ -45,7 +45,7 @@
   "homepage": "https://github.com/mfuon2/sap_bone#readme",
   "dependencies": {
     "@types/morgan": "^1.9.3",
-    "argon2": "^0.27.0",
+    "argon2": "^0.28.2",
     "async-redis": "^2.0.0",
     "axios": "^0.21.1",
     "connect-redis": "^6.0.0",
