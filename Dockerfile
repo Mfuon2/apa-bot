@@ -1,6 +1,6 @@
 # Stage 1
 # pull node from alpine
-FROM node:14.16-alpine as node
+FROM node:14.17.1-alpine as node
 
 # Maintainer Labels
 LABEL project="Whatsapp Bot"
