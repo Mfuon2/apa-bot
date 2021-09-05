@@ -2,6 +2,7 @@
 # pull node from alpine
 FROM node:14.16-alpine as node
 
+
 # Maintainer Labels
 LABEL project="Whatsapp Bot"
 LABEL maintainer="mfolee@gmail.com"
