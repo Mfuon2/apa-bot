@@ -30,7 +30,7 @@ const dev = () => {
 const kill_server = () => {
   process.once('SIGUSR2', function () {
     process.kill(process.pid, 'SIGUSR2');
-    process.exit();
+    process.exit(); // will kill the process on completion
   });
 };
 
